@@ -11,7 +11,7 @@ using Microsoft.Bot.Builder.Dialogs;
 
 namespace LasciviousnessVideoBotApp
 {
-    //[BotAuthentication]
+    [BotAuthentication]
     public class MessagesController : ApiController
     {
         internal static IDialog<object> MakeRoot()
@@ -26,6 +26,8 @@ namespace LasciviousnessVideoBotApp
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
+            var headers = Request.Headers;
+
             if (activity.Type == ActivityTypes.Message)
             {
                 await Conversation.SendAsync(activity, MakeRoot);
